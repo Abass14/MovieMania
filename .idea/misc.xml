@@ -3,11 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/drawable/bottom_nav_background.xml" value="0.1" />
+        <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/drawable/bottom_nav_color_selector.xml" value="0.1" />
+        <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/drawable/fading_brown_view.xml" value="0.1155" />
+        <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/drawable/ic_baseline_notifications_none_24.xml" value="0.1155" />
+        <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/drawable/small_circle.xml" value="0.1155" />
+        <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/layout/fragment_details.xml" value="0.1" />
+        <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/layout/fragment_home.xml" value="0.165" />
         <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/layout/fragment_latest.xml" value="0.1" />
+        <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/layout/fragment_movies.xml" value="0.1" />
+        <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/layout/fragment_my_list.xml" value="0.1" />
         <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/layout/fragment_recent.xml" value="0.1" />
+        <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/layout/fragment_search.xml" value="0.1" />
         <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/layout/fragment_top.xml" value="0.1" />
+        <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/layout/fragment_tv_shows.xml" value="0.1" />
         <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/layout/fragment_video_player.xml" value="0.1" />
+        <entry key="..\:/Users/abass/AndroidStudioProjects/MovieMania/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1796875" />
       </map>
     </option>
   </component>

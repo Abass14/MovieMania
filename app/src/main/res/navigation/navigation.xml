@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/home2">
+
+    <fragment
+        android:id="@+id/details"
+        android:name="com.example.moviemania.detail.ui.Details"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
+    <fragment
+        android:id="@+id/recent"
+        android:name="com.example.moviemania.recent.ui.Recent"
+        android:label="fragment_recent"
+        tools:layout="@layout/fragment_recent" />
+    <fragment
+        android:id="@+id/latest"
+        android:name="com.example.moviemania.latest.ui.Latest"
+        android:label="fragment_latest"
+        tools:layout="@layout/fragment_latest" />
+    <fragment
+        android:id="@+id/top2"
+        android:name="com.example.moviemania.top.ui.Top"
+        android:label="fragment_top"
+        tools:layout="@layout/fragment_top" />
+    <fragment
+        android:id="@+id/tvShows"
+        android:name="com.example.moviemania.tv.ui.TvShows"
+        android:label="fragment_tv_shows"
+        tools:layout="@layout/fragment_tv_shows" />
+    <fragment
+        android:id="@+id/videoPlayer"
+        android:name="com.example.moviemania.vp.ui.VideoPlayer"
+        android:label="fragment_video_player"
+        tools:layout="@layout/fragment_video_player" />
+    <fragment
+        android:id="@+id/myList"
+        android:name="com.example.moviemania.mylist.ui.MyList"
+        android:label="MyList" />
+    <fragment
+        android:id="@+id/movies"
+        android:name="com.example.moviemania.movies.ui.Movies"
+        android:label="Movies" />
+    <fragment
+        android:id="@+id/home2"
+        android:name="com.example.moviemania.home.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/search"
+        android:name="com.example.moviemania.search.Search"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+</navigation>
