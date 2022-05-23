@@ -98,7 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black"
-        app:tabTextColor="@color/dark_gray"
+        app:tabTextColor="@color/fading_brown"
         app:tabSelectedTextColor="@color/red"
         app:tabIndicatorColor="@color/red"
         app:tabGravity="fill"

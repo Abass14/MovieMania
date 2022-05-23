@@ -19,7 +19,7 @@ class MovieViewPager(val fragment: Fragment) : RecyclerView.Adapter<MovieViewPag
 
         fun bind(movie: MovieModel) {
             binding.apply {
-                movieTitle.text = movie.title
+//                movieTitle.text = movie.title
                 movieImage.loadImage(movie.image)
             }
         }
