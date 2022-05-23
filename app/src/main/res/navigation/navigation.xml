@@ -45,7 +45,7 @@
         android:label="Movies" />
     <fragment
         android:id="@+id/home2"
-        android:name="com.example.moviemania.home.Home"
+        android:name="com.example.moviemania.home.ui.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment

@@ -1,0 +1,1 @@
+const val IMAGE_URL = "https://image.shutterstock.com/z/stock-photo-portrait-of-smiling-red-haired-millennial-man-looking-at-camera-sitting-in-caf-or-coffeeshop-1194497251.jpg"
