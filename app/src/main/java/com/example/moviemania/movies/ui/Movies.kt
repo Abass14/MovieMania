@@ -7,12 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviemania.R
 import com.example.moviemania.databinding.FragmentMoviesBinding
 import com.example.moviemania.databinding.MovieCardLayoutBinding
+import com.example.moviemania.home.adapter.HomeRecyclerViewAdapter
 import com.example.moviemania.home.adapter.MovieViewPager
+import com.example.moviemania.home.model.MovieModel
 import com.example.moviemania.home.model.MovieModel.Companion.list
 import com.example.moviemania.utils.MovieList
+import com.example.moviemania.utils.MovieList.setUpMovieRecView
+import com.example.moviemania.utils.ProgressBarUtil.setUpProgressBarStyle
 
 class Movies : Fragment() {
     private var _binding: FragmentMoviesBinding? = null
@@ -28,7 +33,10 @@ class Movies : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        MovieList.setUpMovieViewPager(requireContext(), MovieViewPager(this), binding.movieViewPager, binding.dotsIndicator)
+        MovieList.setUpMovieViewPager(requireContext(), MovieViewPager(this), binding.movieViewPager, binding.dotsIndicator, list)
+        setUpProgressBarStyle(binding.movieProgressBar, resources)
+        setUpMovieRecView(requireContext(), binding.recentMoviesRv)
+        setUpMovieRecView(requireContext(), binding.topMoviesRv)
     }
 
 }

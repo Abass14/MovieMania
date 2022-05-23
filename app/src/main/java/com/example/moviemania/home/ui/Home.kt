@@ -52,7 +52,7 @@ class Home : Fragment() {
             adapter.addFragments(Movies(), "Movies")
             adapter.addFragments(TvShows(), "TvShows")
             adapter.addFragments(MyList(), "My List")
-        }, 1000)
+        }, 500)
     }
 
     private fun loadProfileImage() {
