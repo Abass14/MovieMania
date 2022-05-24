@@ -9,12 +9,35 @@
         android:id="@+id/details"
         android:name="com.example.moviemania.detail.ui.Details"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <action
+            android:id="@+id/action_details_to_videoPlayer"
+            app:destination="@id/videoPlayer" />
+        <action
+            android:id="@+id/action_details_to_tvShows"
+            app:destination="@id/tvShows" />
+        <action
+            android:id="@+id/action_details_to_movies"
+            app:destination="@id/movies" />
+        <action
+            android:id="@+id/action_details_to_top2"
+            app:destination="@id/top2" />
+        <action
+            android:id="@+id/action_details_to_recent"
+            app:destination="@id/recent" />
+        <action
+            android:id="@+id/action_details_to_myList2"
+            app:destination="@id/myList" />
+    </fragment>
     <fragment
         android:id="@+id/recent"
         android:name="com.example.moviemania.recent.ui.Recent"
         android:label="fragment_recent"
-        tools:layout="@layout/fragment_recent" />
+        tools:layout="@layout/fragment_recent" >
+        <action
+            android:id="@+id/action_recent_to_details"
+            app:destination="@id/details" />
+    </fragment>
     <fragment
         android:id="@+id/latest"
         android:name="com.example.moviemania.latest.ui.Latest"
@@ -24,33 +47,100 @@
         android:id="@+id/top2"
         android:name="com.example.moviemania.top.ui.Top"
         android:label="fragment_top"
-        tools:layout="@layout/fragment_top" />
+        tools:layout="@layout/fragment_top" >
+        <action
+            android:id="@+id/action_top2_to_details"
+            app:destination="@id/details" />
+    </fragment>
     <fragment
         android:id="@+id/tvShows"
         android:name="com.example.moviemania.tv.ui.TvShows"
         android:label="fragment_tv_shows"
-        tools:layout="@layout/fragment_tv_shows" />
+        tools:layout="@layout/fragment_tv_shows" >
+        <action
+            android:id="@+id/action_tvShows_to_home2"
+            app:destination="@id/home2" />
+        <action
+            android:id="@+id/action_tvShows_to_details"
+            app:destination="@id/details" />
+        <action
+            android:id="@+id/action_tvShows_to_videoPlayer"
+            app:destination="@id/videoPlayer" />
+        <action
+            android:id="@+id/action_tvShows_to_recent"
+            app:destination="@id/recent" />
+        <action
+            android:id="@+id/action_tvShows_to_top2"
+            app:destination="@id/top2" />
+    </fragment>
     <fragment
         android:id="@+id/videoPlayer"
         android:name="com.example.moviemania.vp.ui.VideoPlayer"
         android:label="fragment_video_player"
-        tools:layout="@layout/fragment_video_player" />
+        tools:layout="@layout/fragment_video_player" >
+        <action
+            android:id="@+id/action_videoPlayer_to_myList"
+            app:destination="@id/myList" />
+    </fragment>
     <fragment
         android:id="@+id/myList"
         android:name="com.example.moviemania.mylist.ui.MyList"
-        android:label="MyList" />
+        android:label="MyList" >
+        <action
+            android:id="@+id/action_myList_to_details"
+            app:destination="@id/details" />
+        <action
+            android:id="@+id/action_myList_to_videoPlayer"
+            app:destination="@id/videoPlayer" />
+    </fragment>
     <fragment
         android:id="@+id/movies"
         android:name="com.example.moviemania.movies.ui.Movies"
-        android:label="Movies" />
+        android:label="Movies" >
+        <action
+            android:id="@+id/action_movies_to_home2"
+            app:destination="@id/home2" />
+        <action
+            android:id="@+id/action_movies_to_details"
+            app:destination="@id/details" />
+        <action
+            android:id="@+id/action_movies_to_videoPlayer"
+            app:destination="@id/videoPlayer" />
+        <action
+            android:id="@+id/action_movies_to_recent"
+            app:destination="@id/recent" />
+        <action
+            android:id="@+id/action_movies_to_top2"
+            app:destination="@id/top2" />
+    </fragment>
     <fragment
         android:id="@+id/home2"
         android:name="com.example.moviemania.home.ui.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_movies"
+            app:destination="@id/movies" />
+        <action
+            android:id="@+id/action_home2_to_tvShows"
+            app:destination="@id/tvShows" />
+        <action
+            android:id="@+id/action_home2_to_myList"
+            app:destination="@id/myList" />
+        <action
+            android:id="@+id/action_home2_to_details"
+            app:destination="@id/details" />
+        <action
+            android:id="@+id/action_home2_to_videoPlayer"
+            app:destination="@id/videoPlayer" />
+    </fragment>
     <fragment
         android:id="@+id/search"
         android:name="com.example.moviemania.search.Search"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_search_to_details"
+            app:destination="@id/details" />
+    </fragment>
 </navigation>

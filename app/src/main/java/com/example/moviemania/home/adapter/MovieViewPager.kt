@@ -1,25 +1,30 @@
 package com.example.moviemania.home.adapter
 
-import android.app.Activity
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviemania.R
 import com.example.moviemania.databinding.MovieCardLayoutBinding
 import com.example.moviemania.home.model.MovieModel
+import com.example.moviemania.utils.AppDiffUtil
+import com.example.moviemania.utils.ItemClickListener
+import com.example.moviemania.utils.PlayBtnClickListener
 import com.example.moviemania.utils.ViewScopeFunctions.loadImage
 import kotlinx.coroutines.launch
 
-class MovieViewPager(val fragment: Fragment) : RecyclerView.Adapter<MovieViewPager.MovieViewHolder>() {
+class MovieViewPager(
+    val fragment: Fragment,
+    private val itemClick: ItemClickListener,
+    private val playClicked: PlayBtnClickListener
+) : RecyclerView.Adapter<MovieViewPager.MovieViewHolder>() {
     private var movieList: ArrayList<MovieModel> = arrayListOf()
     class MovieViewHolder(private val binding: MovieCardLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-
+        val viewBinding = binding
         fun bind(movie: MovieModel) {
             binding.apply {
-//                movieTitle.text = movie.title
                 movieImage.loadImage(movie.image)
             }
         }
@@ -37,6 +42,13 @@ class MovieViewPager(val fragment: Fragment) : RecyclerView.Adapter<MovieViewPag
         fragment.lifecycleScope.launch {
             holder.bind(movieList[position])
         }
+        holder.viewBinding.movieCard.setOnClickListener {
+            itemClick.itemClick(position)
+        }
+        holder.viewBinding.latestMoviePlayBtn.setOnClickListener {
+            playClicked.playClick(position)
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -44,8 +56,11 @@ class MovieViewPager(val fragment: Fragment) : RecyclerView.Adapter<MovieViewPag
     }
 
     fun setUpData(list: ArrayList<MovieModel>) {
-        movieList = list
-        notifyDataSetChanged()
+        val diffUtilCallback = AppDiffUtil(movieList, list)
+        val diffUtilResult = DiffUtil.calculateDiff(diffUtilCallback)
+        movieList.clear()
+        movieList.addAll(list)
+        diffUtilResult.dispatchUpdatesTo(this)
     }
 
 }
