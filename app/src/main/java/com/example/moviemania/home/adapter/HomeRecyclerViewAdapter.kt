@@ -5,14 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviemania.databinding.MovieCardBinding
-import com.example.moviemania.databinding.MovieCardLayoutBinding
 import com.example.moviemania.home.model.MovieModel
 import com.example.moviemania.utils.AppDiffUtil
+import com.example.moviemania.utils.ItemClickListener
 import com.example.moviemania.utils.ViewScopeFunctions.loadImage
 
-class HomeRecyclerViewAdapter : RecyclerView.Adapter<HomeRecyclerViewAdapter.HomeViewHolder>() {
+class HomeRecyclerViewAdapter(
+    private val itemClick: ItemClickListener,
+) : RecyclerView.Adapter<HomeRecyclerViewAdapter.HomeViewHolder>() {
     private val movieList: ArrayList<MovieModel> = arrayListOf()
     class HomeViewHolder (private val binding: MovieCardBinding) : RecyclerView.ViewHolder(binding.root) {
+        val viewBinding = binding
         fun bind (movie: MovieModel) {
             binding.movieCardImage.loadImage(movie.image)
         }
@@ -27,6 +30,9 @@ class HomeRecyclerViewAdapter : RecyclerView.Adapter<HomeRecyclerViewAdapter.Hom
 
     override fun onBindViewHolder(holder: HomeRecyclerViewAdapter.HomeViewHolder, position: Int) {
         holder.bind(movieList[position])
+        holder.viewBinding.movieCardView.setOnClickListener {
+            itemClick.itemClick(position)
+        }
     }
 
     override fun getItemCount(): Int {

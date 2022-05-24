@@ -1,1 +1,2 @@
 const val IMAGE_URL = "https://image.shutterstock.com/z/stock-photo-portrait-of-smiling-red-haired-millennial-man-looking-at-camera-sitting-in-caf-or-coffeeshop-1194497251.jpg"
+const val ARCANE = "https://thewilldowntown.com/wp-content/uploads/2021/12/Arcane.jpg"

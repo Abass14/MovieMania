@@ -2,6 +2,7 @@ package com.example.moviemania.utils
 
 import android.content.Context
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.core.view.marginLeft
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import com.example.moviemania.R
 import com.example.moviemania.home.adapter.HomeRecyclerViewAdapter
 import com.example.moviemania.home.adapter.MovieViewPager
 import com.example.moviemania.home.model.MovieModel
+import com.example.moviemania.mylist.adapter.MyListRecyclerView
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import java.util.*
 import kotlin.collections.ArrayList
@@ -19,7 +21,7 @@ import kotlin.collections.ArrayList
 object MovieList {
 
     fun setUpMovieViewPager(context: Context, adapter: MovieViewPager, viewPager: ViewPager2, dotsIndicator: DotsIndicator, list: ArrayList<MovieModel>) {
-            val numOfPages = 3
+            val numOfPages = list.size
             val delayBefore: Long = 500
             val periodicDelay: Long = 3000
             var currentPage = 0
@@ -49,7 +51,7 @@ object MovieList {
                 viewPager.setCurrentItem(currentPage++, true)
             }
             val timer = Timer()
-            val hanlder = Handler()
+            val hanlder = Handler(Looper.getMainLooper())
             val timerTask = object : TimerTask() {
                 override fun run() {
                     hanlder.post(autoScroll)
@@ -59,11 +61,16 @@ object MovieList {
             timer.schedule(timerTask, delayBefore, periodicDelay)
     }
 
-    fun setUpMovieRecView (context: Context, recyclerView: RecyclerView) {
-        val adapter = HomeRecyclerViewAdapter()
+    fun setUpMovieRecViewHorizontal (context: Context, recyclerView: RecyclerView, adapter: HomeRecyclerViewAdapter) {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         adapter.setUpList(MovieModel.list)
+    }
+
+    fun setUpMovieRecViewVertical (context: Context, recyclerView: RecyclerView, adapter: MyListRecyclerView) {
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        adapter.setUpData(MovieModel.list)
     }
 
 }
