@@ -11,7 +11,6 @@ import com.example.moviemania.R
 import com.example.moviemania.databinding.FragmentMoviesBinding
 import com.example.moviemania.home.adapter.HomeRecyclerViewAdapter
 import com.example.moviemania.home.adapter.MovieViewPager
-import com.example.moviemania.home.model.MovieModel.Companion.list
 import com.example.moviemania.utils.ItemClickListener
 import com.example.moviemania.utils.MovieList
 import com.example.moviemania.utils.MovieList.setUpMovieRecViewHorizontal
@@ -33,7 +32,7 @@ class Movies : Fragment(), ItemClickListener, PlayBtnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        MovieList.setUpMovieViewPager(requireContext(), MovieViewPager(this, this, this), binding.movieViewPager, binding.dotsIndicator, list)
+//        MovieList.setUpMovieViewPager(requireContext(), MovieViewPager(this, this, this), binding.movieViewPager, binding.dotsIndicator, list)
         setUpProgressBarStyle(binding.movieProgressBar, resources)
         setUpMovieRecViewHorizontal(requireContext(), binding.recentMoviesRv, HomeRecyclerViewAdapter(this))
         setUpMovieRecViewHorizontal(requireContext(), binding.topMoviesRv, HomeRecyclerViewAdapter(this))

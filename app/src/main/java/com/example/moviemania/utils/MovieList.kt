@@ -64,13 +64,13 @@ object MovieList {
     fun setUpMovieRecViewHorizontal (context: Context, recyclerView: RecyclerView, adapter: HomeRecyclerViewAdapter) {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        adapter.setUpList(MovieModel.list)
+//        adapter.setUpList(MovieModel.list)
     }
 
     fun setUpMovieRecViewVertical (context: Context, recyclerView: RecyclerView, adapter: MyListRecyclerView) {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context)
-        adapter.setUpData(MovieModel.list)
+//        adapter.setUpData(MovieModel.list)
     }
 
 }

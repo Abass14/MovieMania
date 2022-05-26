@@ -21,9 +21,9 @@ class MyListRecyclerView(
         fun bind(movie: MovieModel) {
             binding.apply {
                 movieListTitleValue.text = movie.title
-                movieListGenreValue.text = movie.genre
-                movieListDescriptionValue.text = movie.description
-                movieListIv.loadImage(movie.image)
+//                movieListGenreValue.text = movie.genre
+//                movieListDescriptionValue.text = movie.description
+//                movieListIv.loadImage(movie.image)
             }
         }
     }
