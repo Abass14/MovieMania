@@ -25,7 +25,7 @@ class MovieViewPager(
         val viewBinding = binding
         fun bind(movie: MovieModel) {
             binding.apply {
-                movieImage.loadImage(movie.image)
+//                movieImage.loadImage(movie.image)
             }
         }
     }

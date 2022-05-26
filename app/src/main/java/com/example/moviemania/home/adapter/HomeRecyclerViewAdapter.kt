@@ -17,7 +17,7 @@ class HomeRecyclerViewAdapter(
     class HomeViewHolder (private val binding: MovieCardBinding) : RecyclerView.ViewHolder(binding.root) {
         val viewBinding = binding
         fun bind (movie: MovieModel) {
-            binding.movieCardImage.loadImage(movie.image)
+//            binding.movieCardImage.loadImage(movie.image)
         }
     }
     override fun onCreateViewHolder(
