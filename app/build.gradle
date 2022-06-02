@@ -72,6 +72,10 @@ dependencies {
     //coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
 
+    def paging_version = "3.1.1"
+
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
     //gson
     implementation 'com.google.code.gson:gson:2.9.0'
 
@@ -111,4 +115,8 @@ dependencies {
 //
 //    implementation "org.jetbrains.anko:anko-commons:0.10.0"
 
+}
+
+kapt {
+    correctErrorTypes = true
 }

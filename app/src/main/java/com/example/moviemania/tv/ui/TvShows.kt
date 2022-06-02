@@ -12,7 +12,9 @@ import com.example.moviemania.databinding.FragmentTvShowsBinding
 import com.example.moviemania.home.adapter.HomeRecyclerViewAdapter
 import com.example.moviemania.home.adapter.MovieViewPager
 import com.example.moviemania.utils.*
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TvShows : Fragment(), ItemClickListener, PlayBtnClickListener {
     private var _binding: FragmentTvShowsBinding? = null
     private val binding get() = _binding!!

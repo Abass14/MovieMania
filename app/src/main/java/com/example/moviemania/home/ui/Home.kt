@@ -21,8 +21,10 @@ import com.example.moviemania.utils.BackGroundTask.doInBack
 import com.example.moviemania.utils.BackGroundTask.doWithHandler
 import com.example.moviemania.utils.Runnable
 import com.example.moviemania.utils.ViewScopeFunctions.loadImage
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class Home : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!

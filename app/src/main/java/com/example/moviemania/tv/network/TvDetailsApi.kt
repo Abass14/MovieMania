@@ -1,4 +1,4 @@
-package com.example.moviemania.tv.model
+package com.example.moviemania.tv.network
 
 import TV_DETAILS
 import com.example.moviemania.home.model.TvShowsDetailModel

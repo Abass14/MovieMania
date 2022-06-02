@@ -15,7 +15,9 @@ import com.example.moviemania.utils.MovieList
 import com.example.moviemania.utils.NavigationController.checkNavigationDestination
 import com.example.moviemania.utils.PlayBtnClickListener
 import com.example.moviemania.utils.ProgressBarUtil
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyList : Fragment(), ItemClickListener, PlayBtnClickListener {
     private var _binding: FragmentMyListBinding? = null
     private val binding get() = _binding!!

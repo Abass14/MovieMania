@@ -9,7 +9,9 @@ import com.example.moviemania.R
 import com.example.moviemania.databinding.ActivityMainBinding
 import com.example.moviemania.utils.ViewScopeFunctions.hide
 import com.example.moviemania.utils.ViewScopeFunctions.show
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
 

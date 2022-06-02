@@ -1,10 +1,9 @@
-package com.example.moviemania.di.repositories
+package com.example.moviemania.movies.repo
 
-import com.example.moviemania.home.model.GenreModel
-import com.example.moviemania.home.model.GetVideosModel
-import com.example.moviemania.home.model.MovieDetailsModel
-import com.example.moviemania.home.model.MovieModel
+import com.example.moviemania.home.model.*
 import com.example.moviemania.movies.network.*
+import com.example.moviemania.movies.repo.MoviesRepoInterface
+import java.lang.Exception
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor(
@@ -15,27 +14,27 @@ class MovieRepository @Inject constructor(
     private val popularMoviesApi: PopularMoviesApi,
     private val topMoviesApi: TopMoviesApi
 ) : MoviesRepoInterface {
-    override fun getLatestMovies(): MovieModel {
+    override suspend fun getLatestMovies(page: Int): MovieModelList {
+        return latestMoviesApi.getLatestMovies(page)
+    }
+
+    override suspend fun getMovieDetails(movie_id: Int): MovieDetailsModel {
         TODO("Not yet implemented")
     }
 
-    override fun getMovieDetails(movie_id: Int): MovieDetailsModel {
+    override suspend fun getMovieGenres(): GenreModel {
         TODO("Not yet implemented")
     }
 
-    override fun getMovieGenres(): GenreModel {
+    override suspend fun getMovieVideos(movie_id: Int): GetVideosModel {
         TODO("Not yet implemented")
     }
 
-    override fun getMovieVideos(movie_id: Int): GetVideosModel {
+    override suspend fun getPopularMovies(page: Int): MovieModelList {
         TODO("Not yet implemented")
     }
 
-    override fun getPopularMovies(): MovieModel {
-        TODO("Not yet implemented")
-    }
-
-    override fun getTopMovies(): MovieModel {
+    override suspend fun getTopMovies(page: Int): MovieModelList {
         TODO("Not yet implemented")
     }
 
