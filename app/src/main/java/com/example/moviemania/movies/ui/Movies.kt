@@ -1,6 +1,7 @@
 package com.example.moviemania.movies.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,9 +21,11 @@ import com.example.moviemania.home.adapter.MoviePagerAdapter
 import com.example.moviemania.home.adapter.MovieViewPager
 import com.example.moviemania.movies.MoviesViewModel
 import com.example.moviemania.utils.*
+import com.example.moviemania.utils.BackGroundTask.doWithHandler
 import com.example.moviemania.utils.MovieList.setUpMovieRecViewHorizontal
 import com.example.moviemania.utils.ProgressBarUtil.setUpProgressBarStyle
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -31,7 +34,7 @@ class Movies : Fragment(), ItemClickListener, PlayBtnClickListener {
     private var _binding: FragmentMoviesBinding? = null
     private val binding get() = _binding!!
     private val movieViewModel: MoviesViewModel by viewModels()
-    private lateinit var moviePagerAdapter: MoviePagerAdapter
+//    private lateinit var moviePagerAdapter: MoviePagerAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,9 +46,9 @@ class Movies : Fragment(), ItemClickListener, PlayBtnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        moviePagerAdapter = MoviePagerAdapter(MovieComparator())
-        setupRecView()
-        observeMovieFlow()
+//        moviePagerAdapter = MoviePagerAdapter(MovieComparator())
+//        setupRecView()
+//        observeMovieFlow()
 //        MovieList.setUpMovieViewPager(requireContext(), MovieViewPager(this, this, this), binding.movieViewPager, binding.dotsIndicator, list)
         setUpProgressBarStyle(binding.movieProgressBar, resources)
 //        setUpMovieRecViewHorizontal(requireContext(), binding.recentMoviesRv, HomeRecyclerViewAdapter(this))
@@ -56,22 +59,23 @@ class Movies : Fragment(), ItemClickListener, PlayBtnClickListener {
 
     }
 
-    private fun setupRecView () {
-        binding.recentMoviesRv.apply {
-            adapter = moviePagerAdapter
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        }
-    }
+//    private fun setupRecView () {
+//        binding.recentMoviesRv.apply {
+//            adapter = moviePagerAdapter
+//            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//        }
+//    }
 
-    private fun observeMovieFlow() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                movieViewModel.flow.collectLatest {
-                    moviePagerAdapter.submitData(it)
-                }
-            }
-        }
-    }
+//    private fun observeMovieFlow() {
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+//                Log.d("CurrentThread - Observe", Thread.currentThread().name)
+//                movieViewModel.flow.collectLatest {
+//                    moviePagerAdapter.submitData(it)
+//                }
+//            }
+//        }
+//    }
 
     override fun itemClick(position: Int) {
         val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment

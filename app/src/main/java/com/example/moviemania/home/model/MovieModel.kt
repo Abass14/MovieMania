@@ -1,7 +1,9 @@
 package com.example.moviemania.home.model
 
 import ARCANE
+import androidx.room.Entity
 
+@Entity(tableName = "movie_model_table")
 data class MovieModel(
     val adult: Boolean,
     val backdrop_path: String?,

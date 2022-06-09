@@ -19,10 +19,13 @@ import com.example.moviemania.mylist.ui.MyList
 import com.example.moviemania.tv.ui.TvShows
 import com.example.moviemania.utils.BackGroundTask.doInBack
 import com.example.moviemania.utils.BackGroundTask.doWithHandler
-import com.example.moviemania.utils.Runnable
 import com.example.moviemania.utils.ViewScopeFunctions.loadImage
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Runnable
+import kotlin.concurrent.thread
 
 @AndroidEntryPoint
 class Home : Fragment() {
@@ -44,17 +47,17 @@ class Home : Fragment() {
     }
 
     private fun setUpTabs () {
-        val adapter = HomeViewPagerAdapter(childFragmentManager)
-        binding.apply {
-            homeViewPager.adapter = adapter
-            homeTabLayout.setupWithViewPager(homeViewPager)
-            homeViewPager.offscreenPageLimit
+        val homeViewPagerAdapter = HomeViewPagerAdapter(requireActivity())
+        binding.homeViewPager.apply {
+            adapter = homeViewPagerAdapter
+            TabLayoutMediator(binding.homeTabLayout, binding.homeViewPager) { tab, position ->
+                when (position) {
+                    0 -> tab.text = "Movies"
+                    1 -> tab.text = "Tv Shows"
+                    2 -> tab.text = "My List"
+                }
+            }.attach()
         }
-        doWithHandler({
-            adapter.addFragments(Movies(), "Movies")
-            adapter.addFragments(TvShows(), "TvShows")
-            adapter.addFragments(MyList(), "My List")
-        }, 500)
     }
 
     private fun loadProfileImage() {
