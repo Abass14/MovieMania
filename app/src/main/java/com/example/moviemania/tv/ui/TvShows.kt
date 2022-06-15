@@ -9,10 +9,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.moviemania.R
 import com.example.moviemania.databinding.FragmentTvShowsBinding
-import com.example.moviemania.home.adapter.HomeRecyclerViewAdapter
-import com.example.moviemania.home.adapter.MovieViewPager
+import com.example.moviemania.home.adapter.TopMovieRecyclerViewAdapter
 import com.example.moviemania.utils.*
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TvShows : Fragment(), ItemClickListener, PlayBtnClickListener {
     private var _binding: FragmentTvShowsBinding? = null
     private val binding get() = _binding!!
@@ -29,8 +30,8 @@ class TvShows : Fragment(), ItemClickListener, PlayBtnClickListener {
         super.onViewCreated(view, savedInstanceState)
 //        MovieList.setUpMovieViewPager(requireContext(), MovieViewPager(this, this, this), binding.tvShowsViewPager, binding.tvDotsIndicator, list)
         ProgressBarUtil.setUpProgressBarStyle(binding.tvShowsProgressBar, resources)
-        MovieList.setUpMovieRecViewHorizontal(requireContext(), binding.recentTvShowsRv, HomeRecyclerViewAdapter(this))
-        MovieList.setUpMovieRecViewHorizontal(requireContext(), binding.topTvShowsRv, HomeRecyclerViewAdapter(this))
+        MovieList.setUpMovieRecViewHorizontal(requireContext(), binding.recentTvShowsRv, TopMovieRecyclerViewAdapter(this))
+        MovieList.setUpMovieRecViewHorizontal(requireContext(), binding.topTvShowsRv, TopMovieRecyclerViewAdapter(this))
     }
 
     override fun itemClick(position: Int) {

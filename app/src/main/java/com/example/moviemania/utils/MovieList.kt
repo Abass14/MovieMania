@@ -3,16 +3,15 @@ package com.example.moviemania.utils
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
-import androidx.core.view.marginLeft
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.moviemania.R
-import com.example.moviemania.home.adapter.HomeRecyclerViewAdapter
-import com.example.moviemania.home.adapter.MovieViewPager
-import com.example.moviemania.home.model.MovieModel
+import com.example.moviemania.home.adapter.TopMovieRecyclerViewAdapter
+import com.example.moviemania.home.adapter.LatestMovieViewPager
+import com.example.moviemania.home.model.LatestMovieModel
 import com.example.moviemania.mylist.adapter.MyListRecyclerView
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import java.util.*
@@ -20,7 +19,7 @@ import kotlin.collections.ArrayList
 
 object MovieList {
 
-    fun setUpMovieViewPager(context: Context, adapter: MovieViewPager, viewPager: ViewPager2, dotsIndicator: DotsIndicator, list: ArrayList<MovieModel>) {
+    fun setUpMovieViewPager(context: Context, adapter: LatestMovieViewPager, viewPager: ViewPager2, dotsIndicator: DotsIndicator, list: ArrayList<LatestMovieModel> = ArrayList(20)) {
             val numOfPages = list.size
             val delayBefore: Long = 500
             val periodicDelay: Long = 3000
@@ -44,24 +43,33 @@ object MovieList {
                 R.dimen.viewpager_current_item_horizontal_margin
             )
             viewPager.addItemDecoration(itemDecoration)
-            val autoScroll = Runnable {
-                if (currentPage == numOfPages) {
-                    currentPage = 0
-                }
-                viewPager.setCurrentItem(currentPage++, true)
-            }
-            val timer = Timer()
-            val hanlder = Handler(Looper.getMainLooper())
-            val timerTask = object : TimerTask() {
-                override fun run() {
-                    hanlder.post(autoScroll)
-                }
-
-            }
-            timer.schedule(timerTask, delayBefore, periodicDelay)
     }
 
-    fun setUpMovieRecViewHorizontal (context: Context, recyclerView: RecyclerView, adapter: HomeRecyclerViewAdapter) {
+    fun movieViewPagerAutoScroll (list: ArrayList<LatestMovieModel>, viewPager: ViewPager2) {
+        val numOfPages = list.size
+        val delayBefore: Long = 500
+        val periodicDelay: Long = 3000
+        var currentPage = 0
+        val autoScroll = Runnable {
+            Log.d("AutoScroll", "$currentPage")
+            Log.d("AutoScroll Total", "$numOfPages")
+            if (currentPage == numOfPages) {
+                currentPage = 0
+            }
+            viewPager.setCurrentItem(currentPage++, true)
+        }
+        val timer = Timer()
+        val hanlder = Handler(Looper.getMainLooper())
+        val timerTask = object : TimerTask() {
+            override fun run() {
+                hanlder.post(autoScroll)
+            }
+
+        }
+        timer.schedule(timerTask, delayBefore, periodicDelay)
+    }
+
+    fun setUpMovieRecViewHorizontal (context: Context, recyclerView: RecyclerView, adapter: TopMovieRecyclerViewAdapter) {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 //        adapter.setUpList(MovieModel.list)
