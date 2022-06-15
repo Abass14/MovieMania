@@ -12,18 +12,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.paging.filter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviemania.R
 import com.example.moviemania.databinding.FragmentMoviesBinding
-import com.example.moviemania.home.adapter.HomeRecyclerViewAdapter
-import com.example.moviemania.home.adapter.MoviePagerAdapter
-import com.example.moviemania.home.adapter.MovieViewPager
+import com.example.moviemania.home.adapter.TopMoviePagerAdapter
+import com.example.moviemania.home.adapter.LatestMovieViewPager
+import com.example.moviemania.home.model.LatestMovieModel
 import com.example.moviemania.movies.MoviesViewModel
 import com.example.moviemania.utils.*
-import com.example.moviemania.utils.BackGroundTask.doWithHandler
-import com.example.moviemania.utils.MovieList.setUpMovieRecViewHorizontal
+import com.example.moviemania.utils.MovieList.movieViewPagerAutoScroll
+import com.example.moviemania.utils.MovieList.setUpMovieViewPager
 import com.example.moviemania.utils.ProgressBarUtil.setUpProgressBarStyle
+import com.example.moviemania.utils.ViewScopeFunctions.hide
+import com.example.moviemania.utils.ViewScopeFunctions.show
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -34,7 +35,9 @@ class Movies : Fragment(), ItemClickListener, PlayBtnClickListener {
     private var _binding: FragmentMoviesBinding? = null
     private val binding get() = _binding!!
     private val movieViewModel: MoviesViewModel by viewModels()
-//    private lateinit var moviePagerAdapter: MoviePagerAdapter
+    private lateinit var moviePagerAdapter: TopMoviePagerAdapter
+    private lateinit var movieViewPager: LatestMovieViewPager
+    private var latestMovies: ArrayList<LatestMovieModel> = arrayListOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,36 +49,62 @@ class Movies : Fragment(), ItemClickListener, PlayBtnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        moviePagerAdapter = MoviePagerAdapter(MovieComparator())
-//        setupRecView()
-//        observeMovieFlow()
-//        MovieList.setUpMovieViewPager(requireContext(), MovieViewPager(this, this, this), binding.movieViewPager, binding.dotsIndicator, list)
+        moviePagerAdapter = TopMoviePagerAdapter(TopMovieComparator())
+        movieViewPager = LatestMovieViewPager(this, this, this)
+        setupRecView()
+        observeMovieFlow()
+        observeLatestMovie()
         setUpProgressBarStyle(binding.movieProgressBar, resources)
+        setUpMovieViewPager(
+            requireContext(), movieViewPager, binding.movieViewPager, binding.dotsIndicator
+        )
 //        setUpMovieRecViewHorizontal(requireContext(), binding.recentMoviesRv, HomeRecyclerViewAdapter(this))
 //        setUpMovieRecViewHorizontal(requireContext(), binding.topMoviesRv, HomeRecyclerViewAdapter(this))
-        binding.seeAllRecentTv.setOnClickListener {
-            findNavController().navigate(R.id.action_home2_to_details)
-        }
-
     }
 
-//    private fun setupRecView () {
-//        binding.recentMoviesRv.apply {
-//            adapter = moviePagerAdapter
-//            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-//        }
-//    }
+    private fun observeLatestMovie () {
+        movieViewModel.getLatestMovies()
+        movieViewModel.latestMoviesLiveData.observe(viewLifecycleOwner) { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    binding.movieProgressBar.show()
+                    latestMovies = resource.data as ArrayList<LatestMovieModel>
+                    movieViewPager.setUpData(resource.data as ArrayList<LatestMovieModel>)
+                    movieViewPagerAutoScroll(resource.data, binding.movieViewPager)
+                }
+                is Resource.Success -> {
+                    latestMovies = resource.data as ArrayList<LatestMovieModel>
+                    movieViewPager.setUpData(resource.data as ArrayList<LatestMovieModel>)
+                    movieViewPagerAutoScroll(resource.data, binding.movieViewPager)
+                    binding.movieProgressBar.hide()
+                }
+                is Resource.Error -> {
+                    binding.movieProgressBar.hide()
+                    Log.d("Resource Error", "${resource.error}")
+                }
+            }
+        }
+    }
 
-//    private fun observeMovieFlow() {
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-//                Log.d("CurrentThread - Observe", Thread.currentThread().name)
-//                movieViewModel.flow.collectLatest {
-//                    moviePagerAdapter.submitData(it)
-//                }
-//            }
-//        }
-//    }
+    private fun setupRecView () {
+        binding.topMoviesRv.apply {
+            adapter = moviePagerAdapter
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
+    }
+
+    private fun observeMovieFlow() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                movieViewModel.topMoviesFlow.collectLatest {
+                    launch(Dispatchers.IO) {
+                        Log.d("CurrentThread", Thread.currentThread().name)
+                        moviePagerAdapter.submitData(it)
+                    }
+                }
+            }
+        }
+    }
 
     override fun itemClick(position: Int) {
         val navHostFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment

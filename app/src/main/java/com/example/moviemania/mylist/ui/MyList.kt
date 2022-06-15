@@ -1,7 +1,6 @@
 package com.example.moviemania.mylist.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviemania.R
 import com.example.moviemania.databinding.FragmentMyListBinding
-import com.example.moviemania.home.adapter.MoviePagerAdapter
+import com.example.moviemania.home.adapter.TopMoviePagerAdapter
 import com.example.moviemania.movies.MoviesViewModel
-import com.example.moviemania.mylist.adapter.MyListRecyclerView
 import com.example.moviemania.utils.*
 import com.example.moviemania.utils.NavigationController.checkNavigationDestination
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +29,7 @@ class MyList : Fragment(), ItemClickListener, PlayBtnClickListener {
     private val binding get() = _binding!!
 
     private val movieViewModel: MoviesViewModel by viewModels()
-    private lateinit var moviePagerAdapter: MoviePagerAdapter
+    private lateinit var moviePagerAdapter: TopMoviePagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +42,7 @@ class MyList : Fragment(), ItemClickListener, PlayBtnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        moviePagerAdapter = MoviePagerAdapter(MovieComparator())
+        moviePagerAdapter = TopMoviePagerAdapter(TopMovieComparator())
         setupRecView()
         observeMovieFlow()
 //        MovieList.setUpMovieRecViewVertical(requireContext(), binding.myListRecView, MyListRecyclerView(this, this))
@@ -61,13 +59,10 @@ class MyList : Fragment(), ItemClickListener, PlayBtnClickListener {
     private fun observeMovieFlow() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                Log.d("CurrentThread - Observe", Thread.currentThread().name)
-                movieViewModel.flow.collectLatest {
+                movieViewModel.topMoviesFlow.collectLatest {
                     launch(Dispatchers.IO) {
-                        Log.d("CurrentThread - Collect", Thread.currentThread().name)
                         moviePagerAdapter.submitData(it)
                     }
-
                 }
             }
         }

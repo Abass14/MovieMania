@@ -1,8 +1,8 @@
 package com.example.moviemania.utils
 
 sealed class Resource<T>(
-    private val data: T? = null,
-    private val error: Throwable? = null
+    val data: T? = null,
+    val error: Throwable? = null
 ) {
     class Success<T>(data: T) : Resource<T>(data)
     class Loading<T>(data: T? = null) : Resource<T>(data)

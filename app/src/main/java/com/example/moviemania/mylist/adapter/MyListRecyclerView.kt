@@ -5,20 +5,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviemania.databinding.MovieListLayoutBinding
-import com.example.moviemania.home.model.MovieModel
-import com.example.moviemania.utils.AppDiffUtil
+import com.example.moviemania.home.model.BaseMovieModel
+import com.example.moviemania.home.model.LatestMovieModel
+import com.example.moviemania.utils.LatestMovieDiffUtil
 import com.example.moviemania.utils.ItemClickListener
 import com.example.moviemania.utils.PlayBtnClickListener
-import com.example.moviemania.utils.ViewScopeFunctions.loadImage
 
 class MyListRecyclerView(
     private val itemClickListener: ItemClickListener,
     private val playBtnClickListener: PlayBtnClickListener
 ) : RecyclerView.Adapter<MyListRecyclerView.MyListViewHolder>() {
-    private val myList: ArrayList<MovieModel> = arrayListOf()
+    private val myList: ArrayList<LatestMovieModel> = arrayListOf()
     class MyListViewHolder(private val binding: MovieListLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         val viewBinding = binding
-        fun bind(movie: MovieModel) {
+        fun bind(movie: LatestMovieModel) {
             binding.apply {
                 movieListTitleValue.text = movie.title
 //                movieListGenreValue.text = movie.genre
@@ -47,8 +47,8 @@ class MyListRecyclerView(
         return myList.size
     }
 
-    fun setUpData(newList: ArrayList<MovieModel>) {
-        val diffUtilCallback = AppDiffUtil(myList, newList)
+    fun setUpData(newList: ArrayList<LatestMovieModel>) {
+        val diffUtilCallback = LatestMovieDiffUtil(myList, newList)
         val diffUtilResult = DiffUtil.calculateDiff(diffUtilCallback)
         myList.clear()
         myList.addAll(newList)

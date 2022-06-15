@@ -1,5 +1,7 @@
 package com.example.moviemania.home.model
 
+import androidx.room.Entity
+
 data class MovieDetailsModel(
     val adult: Boolean,
     val backdrop_path: String,

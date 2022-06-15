@@ -1,5 +1,7 @@
 package com.example.moviemania.di.repositories
 
+import com.example.moviemania.di.database.AppDatabase
+import com.example.moviemania.di.database.LatestMovieDao
 import com.example.moviemania.movies.network.*
 import com.example.moviemania.movies.repo.MovieRepository
 import com.example.moviemania.movies.repo.MoviesRepoInterface
@@ -20,6 +22,8 @@ class MoviesRepoDependencies {
         movieGenresApi: MovieGenresApi,
         movieVideosApi: MovieVideosApi,
         popularMoviesApi: PopularMoviesApi,
-        topMoviesApi: TopMoviesApi
-    ) : MoviesRepoInterface = MovieRepository(latestMoviesApi, movieDetailsApi, movieGenresApi, movieVideosApi, popularMoviesApi, topMoviesApi)
+        topMoviesApi: TopMoviesApi,
+        latestMovieDao: LatestMovieDao,
+        appDatabase: AppDatabase
+    ) : MoviesRepoInterface = MovieRepository(latestMoviesApi, movieDetailsApi, movieGenresApi, movieVideosApi, popularMoviesApi, topMoviesApi, latestMovieDao, appDatabase)
 }

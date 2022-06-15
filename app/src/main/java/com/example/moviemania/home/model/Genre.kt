@@ -1,5 +1,8 @@
 package com.example.moviemania.home.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 data class Genre(
     val id: Int,
     val name: String

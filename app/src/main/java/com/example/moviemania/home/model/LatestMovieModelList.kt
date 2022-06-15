@@ -1,10 +1,9 @@
 package com.example.moviemania.home.model
 
-import androidx.room.Entity
 
-data class TvShowsModelList(
+data class LatestMovieModelList(
     val page: Int,
-    val results: List<LatestTvShowModel>,
+    val results: List<LatestMovieModel>,
     val total_results: Int,
     val total_pages: Int
 )
